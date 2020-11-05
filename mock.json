@@ -1,0 +1,27 @@
+[
+  { 
+    "city": "Puebla México",
+    "colonia": "El Tamborcito",
+    "lat": "19.0572039",
+    "lng": "-98.2084129",
+    "data": {
+      "infectados": "60",
+      "recuperdos": "30",
+      "muertes": "10",
+      "confirmados": "60"
+    }
+    
+  },
+  { 
+    "city": "Puebla México",
+    "colonia": "San Miguelito",
+    "lat": "19.0540516",
+    "lng": "-98.2109925",
+    "data": {
+      "infectados": "60",
+      "recuperdos": "30",
+      "muertes": "10",
+      "confirmados": "40"
+    }
+  }
+]
