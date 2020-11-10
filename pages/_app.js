@@ -3,9 +3,9 @@ import { prepareClientPortals } from '@jesstelford/react-portal-universal'
 import NProgress from 'nprogress'
 import Router from 'next/router'
 import Head from 'next/head'
-import { CookiesProvider } from 'react-cookie'
 import theme from 'utils/theme'
 import BaseStyles from 'components/base-styles'
+import Provider from 'helpers/provider'
 
 if (typeof window !== 'undefined') {
   // On the client, we have to run this once before React attempts a render.
@@ -27,6 +27,7 @@ Router.onRouterChangeError = () => {
 }
 
 function App({ Component, pageProps }) {
+  
   return (
     <ThemeProvider theme={theme}>
       <Head>
@@ -34,12 +35,10 @@ function App({ Component, pageProps }) {
         <title>Covid-19 Tracking, La APP que te da el seguimiento del virus sars cov 2 cerca de tí</title>
       </Head>
       <BaseStyles theme={{}} />
-      <CookiesProvider>
-        <>
-          <Component {...pageProps} />
-          <div id="page-portal" />
-        </>
-      </CookiesProvider>
+      <Provider>
+        <Component {...pageProps} />
+        <div id="page-portal" />
+      </Provider>
     </ThemeProvider>
   )
 }

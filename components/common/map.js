@@ -1,10 +1,9 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import {
   GoogleMap,
   withScriptjs,
   withGoogleMap,
   Marker,
-  InfoWindow
 } from 'react-google-maps' 
 import json from 'mock.json';
 import { useState } from 'react'

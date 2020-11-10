@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { GiMedicalPack } from 'react-icons/gi'
 import { FaMapMarkedAlt } from 'react-icons/fa'
 import { AiOutlineUser } from 'react-icons/ai'
+import { BiLogOut } from 'react-icons/bi'
 import { P } from 'common/typography'
 import { useRouter } from 'next/router'
+import { UserContext } from 'helpers/provider'
+import { logoutSession } from 'lib/auth'
+
 
 const menux = [
   {
@@ -41,6 +45,22 @@ const MenuStyled = styled.nav`
   max-width: 300px;
   width: 100%;
 
+  .logut {
+    margin-top: 90%;
+    cursor: pointer;
+    user-select: none;
+    a {
+      display: flex;
+      align-items: center;
+      padding: 19px 18px;
+      p {
+        margin-left: 10px;
+      }
+      :hover {
+        background: var(--gray);
+      }
+    }
+  }
   .items {
     margin: 0;
     display: grid;
@@ -80,7 +100,9 @@ const MenuStyled = styled.nav`
 `
 
 function Menu({ className }) {
+  const user = useContext(UserContext)
   const pathname = useRouter().asPath
+  console.log('desde el menu este es el user ', user)
   return (
     <MenuStyled className={className}>
       <div className="logo">
@@ -100,6 +122,14 @@ function Menu({ className }) {
           )
         })}
       </ul>
+      <div className="logut">
+        {user && (
+          <a onClick={logoutSession}>
+            <BiLogOut size={30} color='var(--dark)' />
+            <P>Cerrar sessión</P>
+          </a>
+        )}
+      </div>
     </MenuStyled>
   )
 }

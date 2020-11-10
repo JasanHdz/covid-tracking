@@ -2,14 +2,16 @@ import BottomNavigation from 'common/menu/bottom-navigation'
 import Wrapper from 'common/google-maps/wrapper'
 import Map from "common/map"
 import Navigation from 'common/menu/navigation'
+import Places from 'lib/database/places'
+import { useMemo } from 'react'
 
-const API_KEY = 'AIzaSyD6um7DFFzTaqXG7uGCM1WJkIhvF3E7X34'
-const URL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${API_KEY}`
+const URL = `https://maps.googleapis.com/maps/api/js?v=3.exp&key=${process.env.GOOGLE_MAPS_API_KEY}`
 const defaultMapOptions = {
   fullscreenControl: false,
 } 
 
-function Index() {
+function Index(props) {
+  console.log(props)
   return (
     <>
       <Map
@@ -23,6 +25,16 @@ function Index() {
       <BottomNavigation />
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  const places = new Places()
+  const data = await places.getCollection()
+  return {
+    props: {
+      data,
+    }
+  }
 }
 
 export default Index;

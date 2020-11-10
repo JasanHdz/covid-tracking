@@ -9,7 +9,7 @@ const OverlayStyled = styled(Overlay)``
 const MenuStyled = styled(Menu)``
 
 const NavigationStyled = styled.div`
-  padding: 1em 0;
+  /* padding: 1em 0; */
   position: fixed;
   right: 0;
   left: 0;

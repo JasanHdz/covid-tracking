@@ -10,6 +10,20 @@
       }
     }
   ],
-  "env": {},
-  "build": {}
+  "env": {
+    "API_KEY": "@covid_tracking_api_key",
+    "AUTH_DOMAIN": "@covid_tracking_auth_domain",
+    "DATABASE_URL": "@covid_tracking_database_url",
+    "PROJECT_ID": "@covid_tracking_project_id",
+    "STORAGE_BUCKET": "@covid_tracking_storage_bucket",
+    "MESSAGING_SENDER_ID": "@covid_tracking_messagin_sender_id",
+    "APP_ID": "@covid_tracking_app_id",
+    "MEASUREMENT_ID": "@covid_tracking_measurement_id"
+  },
+  "build": {
+    "env": {
+      "GOOGLE_MAPS_API_KEY": "@covid_tracking_google_maps_api_key",
+      "PROJECT_ID": "@covid_tracking_project_id"
+    }
+  }
 }
