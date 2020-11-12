@@ -31,7 +31,7 @@ const menux = [
 
 const MenuStyled = styled.nav`
   height: inherit;
-  padding: 50px 0 1em 0;
+  padding: 1.2em 0;
   display: block;
   position: absolute;
   top: 0;
@@ -45,8 +45,8 @@ const MenuStyled = styled.nav`
   max-width: 300px;
   width: 100%;
 
-  .logut {
-    margin-top: 90%;
+  .logout {
+    margin-top: 40vh;
     cursor: pointer;
     user-select: none;
     a {
@@ -100,9 +100,10 @@ const MenuStyled = styled.nav`
 `
 
 function Menu({ className }) {
-  const user = useContext(UserContext)
+  const { state: user, setState } = useContext(UserContext)
   const pathname = useRouter().asPath
   console.log('desde el menu este es el user ', user)
+  const handleLogout = () => logoutSession(setState)
   return (
     <MenuStyled className={className}>
       <div className="logo">
@@ -122,9 +123,9 @@ function Menu({ className }) {
           )
         })}
       </ul>
-      <div className="logut">
+      <div className="logout">
         {user && (
-          <a onClick={logoutSession}>
+          <a onClick={handleLogout}>
             <BiLogOut size={30} color='var(--dark)' />
             <P>Cerrar sessión</P>
           </a>

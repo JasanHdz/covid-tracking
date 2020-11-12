@@ -27,19 +27,15 @@ const LoginFormStyled = styled.section`
   .logotipo {
     text-align: center;
   }
-  .isotipo {
-    margin-top: 5px;
+  h1 {
+    margin: 30px 0 30px 0;
+    text-align: center;
     font-size: 20px;
   }
-  h1 {
-    margin: 40px 0 40px 0;
-    text-align: center;
-  }
   .alternative {
-    margin: 10px 0 10px 0;
     display: flex;
-    align-items: center;
     flex-wrap: wrap;
+    align-items: center;
     color: rgba(0,0,0,0.24);
     p {
       margin: 0 4px 0 4px;
@@ -55,12 +51,33 @@ const LoginFormStyled = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    height: 300px;
+    height: 260px;
     input {
       font-size: 1rem;
       padding: 1rem;
       border-radius: 12px;
       outline: 0;
+      border: 1px solid var(--dark);
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .isotipo {
+      margin-top: 5px;
+      font-size: 20px;
+    }
+    h1 {
+      margin: 40px 0 40px 0;
+      font-size: initial;
+    }
+    .alternative {
+      margin: 10px 0 10px 0;
+    }
+  }
+
+  @media screen and (min-width: 400px) {
+    .form {
+      height: 300px;
     }
   }
 `

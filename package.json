@@ -20,6 +20,7 @@
     "chart.js": "2.9.4",
     "dotenv": "8.2.0",
     "firebase": "^8.0.1",
+    "geoip-lite": "1.4.2",
     "next": "9.5.4",
     "next-offline": "5.0.2",
     "nprogress": "0.2.0",

@@ -38,3 +38,9 @@ export function redirect(location, context) {
     Router.push(location)
   }
 }
+
+export function getIp(req, res) {
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+  res.end()
+  return ip
+}

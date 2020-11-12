@@ -63,10 +63,10 @@ function BottomNavigation() {
   const pathname = useRouter().asPath
   return (
     <NavigationContainer>
-      {items.map((item) => {
+      {items.map((item, index) => {
         const color = `rgba(45, 187, 84, ${pathname === item.url ? 1 : 0.5})`
         return (
-          <Link href={item.url}>
+          <Link key={index} href={item.url}>
             <a className="tab">
               <item.icon color={color} size={25} />
               <P color={color}>{item.title}</P>

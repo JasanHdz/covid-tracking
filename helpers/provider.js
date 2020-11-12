@@ -37,7 +37,7 @@ function Provider({ children }) {
     return () => unsuscribe()
   }, [])
 
-  return <UserContext.Provider value={state}>{children}</UserContext.Provider>
+  return <UserContext.Provider value={{ state, setState }}>{children}</UserContext.Provider>
 }
 
 export default Provider

@@ -9,7 +9,6 @@ const OverlayStyled = styled(Overlay)``
 const MenuStyled = styled(Menu)``
 
 const NavigationStyled = styled.div`
-  /* padding: 1em 0; */
   position: fixed;
   right: 0;
   left: 0;
@@ -21,7 +20,7 @@ const NavigationStyled = styled.div`
     right: 13px;
     top: 12px;
     padding: 5px;
-    background-color: white;
+    background-color: ${({ background }) => (background || 'transparent')};
     cursor: pointer;
     .close {
       display: none;
@@ -48,9 +47,9 @@ const NavigationStyled = styled.div`
   }
 `
 
-function Navigation() {
+function Navigation({ background }) {
   return (
-    <NavigationStyled>
+    <NavigationStyled background={background}>
         <input type="checkbox" className="checkbox" id="toggle-button" />
         <label htmlFor="toggle-button" className="toggle-button">
           <GrMenu className="burger" size={25} color="white" />
