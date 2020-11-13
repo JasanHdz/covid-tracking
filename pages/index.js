@@ -38,7 +38,7 @@ export async function getServerSideProps(context) {
 
   const location = {
     lat: isNull ? null : geo.ll[0],
-    lng: isNull ? null :gegeo.ll[1]
+    lng: isNull ? null : geo.ll[1]
   }
   return {
     props: {

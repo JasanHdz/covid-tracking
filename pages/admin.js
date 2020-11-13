@@ -1,17 +1,17 @@
-import Wrapper from 'common/google-maps/wrapper'
+import Wrapper from 'common/wrapper'
 import Navigation from 'common/menu/navigation'
 import { getSession, withAuth } from 'helpers/session'
+import User from 'components/dashboard/user'
+import Search from 'components/dashboard/search'
+import ColoniesList from 'components/dashboard/colonies-list'
 
 function Admin({ token, payload }) {
   return (
     <>
       <Wrapper>
-        {token && (
-          <>
-            <p>Hola {payload.userName} nos da gusto tenerlo por acá</p>
-            <img src={payload.photoURL} alt="avatar" />
-          </>
-        )}
+        <User photoURL={payload.photoURL} userName={payload.userName} />
+        <Search placeholder="Buscar colonia..." />
+        <ColoniesList />
       </Wrapper>
       <Navigation />
     </>

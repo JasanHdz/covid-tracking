@@ -13,6 +13,7 @@ const ButtonStyled = styled.button`
   user-select: none;
   font-weight: 500;
   line-height: 16px;
+  background-color: ${({ background }) => background};
 
   :active {
     transform: scale(.9);
