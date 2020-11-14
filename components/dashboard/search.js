@@ -9,6 +9,12 @@ const SearchStyled = styled.input`
   margin-top: 19px;
   box-sizing: border-box;
   width: 100%;
+  outline: 0;
+  border: 1px solid #D0D7DC;
+
+  :focus {
+    border-color: var(--dark);
+  }
 `
 
 

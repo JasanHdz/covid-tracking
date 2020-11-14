@@ -13,9 +13,15 @@ const OverlayStyled = styled.div`
   bottom: 0;
 `
 
-function Overlay({ children, ...otherProps }) {
+function Overlay({ children, onClick, ...otherProps }) {
+  function handleClick(event) {
+    if (onClick) {
+      console.log('has hecho click')
+      onClick()
+    }
+  }
   return (
-    <OverlayStyled {...otherProps}>
+    <OverlayStyled onClick={handleClick} {...otherProps}>
       {children}
     </OverlayStyled>
   )

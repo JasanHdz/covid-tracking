@@ -4,14 +4,15 @@ import { getSession, withAuth } from 'helpers/session'
 import User from 'components/dashboard/user'
 import Search from 'components/dashboard/search'
 import ColoniesList from 'components/dashboard/colonies-list'
+import Places from 'lib/database/places'
 
-function Admin({ token, payload }) {
+function Admin({ places, payload }) {
   return (
     <>
       <Wrapper>
         <User photoURL={payload.photoURL} userName={payload.userName} />
         <Search placeholder="Buscar colonia..." />
-        <ColoniesList />
+        <ColoniesList places={places} />
       </Wrapper>
       <Navigation />
     </>
@@ -21,8 +22,11 @@ function Admin({ token, payload }) {
 export async function getServerSideProps(context) {
   withAuth(context)
   const session = getSession(context.req)
+  const places = await new Places().getCollection()
+  console.log(places)
   return {
     props: {
+      places,
       ...session
     }
   }

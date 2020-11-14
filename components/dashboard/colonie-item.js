@@ -1,10 +1,10 @@
-import Wrapper from 'common/wrapper'
 import React from 'react'
 import styled from 'styled-components'
 import Button from 'common/button'
+import { useRouter } from 'next/router'
 
 const ButtonStyled = styled(Button)`
-  padding: 4px 12px;
+  padding: 6px 12px;
   color: white;
 `
 
@@ -31,18 +31,34 @@ const ColonyStyled = styled.article`
   }
 `
 
-function Colony() {
+function Colony({ colonie, deleteColonie }) {
+  const {
+    uid,
+    confirmados,
+    recuperados,
+    colonia,
+    city,
+    muertes
+  } = colonie
+  const router = useRouter()
+  const editColonie = (uid) => {
+    router.push({
+      pathname: '/admin/[slug]',
+      query: { slug: uid }
+    })
+  } 
+  console.log(colonia, city, 'items')
   return (
     <ColonyStyled>
       <div className="colony-info">
-        <h4>El tamborcito, Puebla, México</h4>
-        <p>Confirmados: 5.000</p>
-        <p>Recuperados: 1,000</p>
-        <p>Muertes: 2,000</p>
+        <h4>{colonia}, {city}</h4>
+        <p>Confirmados: {confirmados}</p>
+        <p>Recuperados: {recuperados}</p>
+        <p>Muertes: {muertes}</p>
       </div>
       <div className="colony-buttons">
-        <ButtonStyled background="#FF7474">Eliminar</ButtonStyled>
-        <ButtonStyled background="#C4C4C4">Ver Detalles</ButtonStyled>
+        <ButtonStyled onClick={() => editColonie(uid)} background="#C4C4C4">Editar</ButtonStyled>
+        <ButtonStyled onClick={() => deleteColonie(uid)} background="#FF7474">Eliminar</ButtonStyled>
       </div>
     </ColonyStyled>
   )

@@ -14,9 +14,13 @@ const ButtonStyled = styled.button`
   font-weight: 500;
   line-height: 16px;
   background-color: ${({ background }) => background};
-
+  width: ${({ fullSize }) => fullSize && '100%'};
   :active {
     transform: scale(.9);
+  }
+
+  :disabled {
+    opacity: 0.5;
   }
 `
 

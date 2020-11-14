@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { UniversalPortal } from '@jesstelford/react-portal-universal'
 import styled from 'styled-components'
 import { BtnPrimary } from 'common/button'
 import { estados } from './estados'
 import ColonyItem from './colonie-item'
+import AddColonieModal from './add-colonie'
+import Overaly from 'common/overlay'
+import { modelColonie } from './model-colonie'
 
 const ColoniesListStyled = styled.section`
   .row-filter {
@@ -33,7 +37,18 @@ const ColoniesListStyled = styled.section`
   }
 `
 
-function ColoniesList() {
+function ColoniesList({ places = [] }) {
+  const [isActiveModal, setIsActiveModal] = useState(false)
+  const [colonies, setColonies] = useState(places)
+  const [addPlace, setAddPlace] = useState(modelColonie)
+  const handleOpenModal = () => setIsActiveModal(true)
+  const deleteColonie = (uid) => {
+    const newColonies = colonies.filter(colonie => colonie.uid !== uid) 
+    setColonies(newColonies)
+  }
+  const updateList = (payload) => {
+    setColonies([payload, ...colonies])
+  }
   return (
     <ColoniesListStyled>
       <div className="row-filter">
@@ -46,17 +61,23 @@ function ColoniesList() {
             })}
           </select>
         </div>
-        <BtnPrimary>Agregar colonia</BtnPrimary>
+        <BtnPrimary onClick={handleOpenModal}>Agregar colonia</BtnPrimary>
       </div>
       <div className="colonies-list">
-        <ColonyItem />
-        <ColonyItem />
-        <ColonyItem />
-        <ColonyItem />
-        <ColonyItem />
-        <ColonyItem />
-        <ColonyItem />
+        {colonies.map((colonie) => <ColonyItem key={colonie.uid} deleteColonie={deleteColonie} colonie={colonie} />)}
       </div>
+      {isActiveModal && (
+        <UniversalPortal selector="#page-portal">
+          <Overaly zIndex={10} isActive>
+            <AddColonieModal
+              place={addPlace}
+              setPlace={setAddPlace}
+              onClose={() => setIsActiveModal(false)}
+              updateList={updateList}
+            />
+          </Overaly>
+        </UniversalPortal>
+      )}
     </ColoniesListStyled>
   )
 }
