@@ -42,7 +42,7 @@ const DefaultStyles = createGlobalStyle`
   
   .group {
     margin-bottom: 15px;
-    input[type=text], input[type=number], input[type=email], textarea {
+    input[type=text], input[type=number], input[type=email], textarea, select {
       border-radius: 4px;
       margin-top: 8px;
       border: 1px solid #D0D7DC;

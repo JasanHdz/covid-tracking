@@ -2,7 +2,6 @@ import Wrapper from 'common/wrapper'
 import Navigation from 'common/menu/navigation'
 import { getSession, withAuth } from 'helpers/session'
 import User from 'components/dashboard/user'
-import Search from 'components/dashboard/search'
 import ColoniesList from 'components/dashboard/colonies-list'
 import Places from 'lib/database/places'
 
@@ -11,7 +10,6 @@ function Admin({ places, payload }) {
     <>
       <Wrapper>
         <User photoURL={payload.photoURL} userName={payload.userName} />
-        <Search placeholder="Buscar colonia..." />
         <ColoniesList places={places} />
       </Wrapper>
       <Navigation />

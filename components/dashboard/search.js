@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
+import Places from 'lib/database/places'
 
 const SearchStyled = styled.input`
   padding: 9px 15px;
@@ -18,8 +19,13 @@ const SearchStyled = styled.input`
 `
 
 
-function Search({ placeholder }) {
-  return <SearchStyled placeholder={placeholder} />
+function Search({ placeholder, value, onChange }) {
+  return <SearchStyled
+    type="text"
+    placeholder={placeholder}
+    value={value}
+    onChange={onChange}
+  />
 }
 
 export default Search

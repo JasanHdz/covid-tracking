@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import Button from 'common/button'
 import { useRouter } from 'next/router'
+import { UniversalPortal } from '@jesstelford/react-portal-universal'
+import Overaly from 'common/overlay'
+import Modal from 'common/modal-layout'
+import Places from 'lib/database/places'
 
 const ButtonStyled = styled(Button)`
   padding: 6px 12px;
@@ -32,6 +36,7 @@ const ColonyStyled = styled.article`
 `
 
 function Colony({ colonie, deleteColonie }) {
+  const [isActiveModal, setIsActiveModal] = useState(false)
   const {
     uid,
     confirmados,
@@ -46,8 +51,16 @@ function Colony({ colonie, deleteColonie }) {
       pathname: '/admin/[slug]',
       query: { slug: uid }
     })
-  } 
-  console.log(colonia, city, 'items')
+  }
+  const toggleModal = () => {
+    setIsActiveModal(!isActiveModal)
+  }
+  const handleDeleteColonie = () => {
+    new Places().deleteDocumentByUid(uid).then(() => {
+      deleteColonie(uid)
+      toggleModal()
+    }).catch(({ message }) => console.error(message))
+  }
   return (
     <ColonyStyled>
       <div className="colony-info">
@@ -58,8 +71,21 @@ function Colony({ colonie, deleteColonie }) {
       </div>
       <div className="colony-buttons">
         <ButtonStyled onClick={() => editColonie(uid)} background="#C4C4C4">Editar</ButtonStyled>
-        <ButtonStyled onClick={() => deleteColonie(uid)} background="#FF7474">Eliminar</ButtonStyled>
+        <ButtonStyled onClick={toggleModal} background="#FF7474">Eliminar</ButtonStyled>
       </div>
+      {isActiveModal && (
+        <UniversalPortal selector="#page-portal">
+          <Overaly zIndex={10} isActive>
+            <Modal onClose={() => setIsActiveModal(false)}>
+              <h3 className="modal-title">¿Estas seguro de eliminas la colonia: {colonia}?</h3>
+              <div className="buttons-wrapper">
+                <Button onClick={handleDeleteColonie} color="white"  background="#FF7474">Confirmar</Button>
+                <Button color="white" onClick={toggleModal} background="#C4C4C4">Cancelar</Button>
+              </div>
+            </Modal>
+          </Overaly>
+        </UniversalPortal>
+      )}
     </ColonyStyled>
   )
 }

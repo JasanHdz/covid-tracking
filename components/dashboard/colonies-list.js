@@ -7,6 +7,7 @@ import ColonyItem from './colonie-item'
 import AddColonieModal from './add-colonie'
 import Overaly from 'common/overlay'
 import { modelColonie } from './model-colonie'
+import Search from 'components/dashboard/search'
 
 const ColoniesListStyled = styled.section`
   .row-filter {
@@ -37,43 +38,61 @@ const ColoniesListStyled = styled.section`
   }
 `
 
+function filterColonies(colonie, value) {
+  if (
+    colonie.colonia.toLowerCase().includes(value.toLowerCase()) ||
+    colonie.city.toLowerCase().includes(value.toLowerCase())
+  ) return colonie
+}
+
 function ColoniesList({ places = [] }) {
-  const [isActiveModal, setIsActiveModal] = useState(false)
-  const [colonies, setColonies] = useState(places)
+  const [colonies, setColonies] = useState(places) 
+  const [isActiveAddColonieModal, setIsActiveAddColonieModal] = useState(false)
   const [addPlace, setAddPlace] = useState(modelColonie)
-  const handleOpenModal = () => setIsActiveModal(true)
+  const [inputValue, setInputValue] = useState('')
+  const handleChangeSearch = (event) => {
+    const value = event.target.value
+    setInputValue(value)
+    setColonies(places.filter(item => filterColonies(item, value)))
+  }
+  const addColonieInList = (payload) => {
+    setColonies([payload, ...colonies])
+  }
   const deleteColonie = (uid) => {
     const newColonies = colonies.filter(colonie => colonie.uid !== uid) 
     setColonies(newColonies)
   }
-  const updateList = (payload) => {
-    setColonies([payload, ...colonies])
+  const handleSelectState = (event) => {
+    const value = event.target.value
+    setColonies(places.filter(item => item.city === value))
+    console.log(value)
   }
   return (
     <ColoniesListStyled>
+      <Search value={inputValue} onChange={handleChangeSearch} />
       <div className="row-filter">
         <div className="select-container">
           <label className="estados" htmlFor="estados">Filtrar por estado</label>
-          <select id="estados" className="select" name="estados">
-            <option value="">Estado</option>
+          <select onChange={handleSelectState} id="estados" className="select" name="estados">
+            <option disabled defaultValue >Estado</option>
             {estados.map((estado, index) => {
               return <option key={index} value={estado}>{estado}</option>
             })}
           </select>
         </div>
-        <BtnPrimary onClick={handleOpenModal}>Agregar colonia</BtnPrimary>
+        <BtnPrimary onClick={() => setIsActiveAddColonieModal(true)}>Agregar colonia</BtnPrimary>
       </div>
       <div className="colonies-list">
         {colonies.map((colonie) => <ColonyItem key={colonie.uid} deleteColonie={deleteColonie} colonie={colonie} />)}
       </div>
-      {isActiveModal && (
+      {isActiveAddColonieModal && (
         <UniversalPortal selector="#page-portal">
           <Overaly zIndex={10} isActive>
             <AddColonieModal
               place={addPlace}
               setPlace={setAddPlace}
-              onClose={() => setIsActiveModal(false)}
-              updateList={updateList}
+              onClose={() => setIsActiveAddColonieModal(false)}
+              updateList={addColonieInList}
             />
           </Overaly>
         </UniversalPortal>

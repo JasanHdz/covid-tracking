@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import FormGroup from 'common/form-group'
+import Select from 'common/select'
 import { BtnPrimary } from 'common/button'
 import useInputValue from 'hooks/use-input-value' 
 import { compareTwoObjects } from 'utils/comparate-objects'
 import Places from 'lib/database/places'
+
 
 function UpdateForm({ place }) {
   const [newPlace, setNewPlace] = useState(place)
@@ -48,7 +50,7 @@ function UpdateForm({ place }) {
   return (
     <form method="POST" onSubmit={handleSubmit}>
       <FormGroup value={colonia.value} onChange={recuperados.onChange} label="Colonia" />
-      <FormGroup value={city.value} onChange={city.onChange} label="Ciudad" />
+      <Select value={city.value} option={city.value} onChange={city.onChange} label="Estado" id="estado" />
       <FormGroup type="number" value={lat.value} onChange={lat.onChange} label="Latitud" />
       <FormGroup type="number" value={lng.value} onChange={lng.onChange} label="Longitud" />
       <FormGroup type="number" value={confirmados.value} onChange={confirmados.onChange} label="Confirmados" />

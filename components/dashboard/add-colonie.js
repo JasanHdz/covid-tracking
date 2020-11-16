@@ -7,6 +7,8 @@ import { BtnPrimary } from 'common/button'
 import useInputValue from 'hooks/use-input-value'
 import { modelColonie } from './model-colonie'
 import Places from 'lib/database/places'
+import Select from 'common/select'
+
 
 const AddColonieStyled = styled.div`
   position: fixed;
@@ -89,7 +91,7 @@ function AddColonieModal({ onClose, place, setPlace, updateList }) {
       </div>
       <form method="POST" onSubmit={handleSubmit}>
         <FormGroup {...colonia} label="Colonia" />
-        <FormGroup {...city} label="Estado" />
+        <Select id="estado" value="" option="--Selecciona un estado--" onChange={city.onChange} label="Estado" />
         <div className="row-two-columns">
           <FormGroup {...lat} type="number" label="Latitud" />
           <FormGroup {...lng} type="number" label="Longitud" />
