@@ -90,10 +90,10 @@ const ModalStyled = styled.div`
   }
 `
 
-function Modal({ location, onClose, }) {
+function Modal({ data, onClose }) {
+  const { city, colonia, confirmados, muertes, recuperados } = data
   const [activeShowMore, setActiveShowMore] = useState(false)
   function handleClick() {
-    console.log('hello world')
     setActiveShowMore(true)
   }
   return (
@@ -103,32 +103,32 @@ function Modal({ location, onClose, }) {
           <MdClose className="close" size={25} color="var(--primary)" />
         </div>
         <div className="modal-content">
-          <p className="modal-title"><strong>{location.colonia}, {location.city}</strong></p>
-          <p style={{ color: '#ED4B4B'}}>{location.data.confirmados} Casos de Covid-19 <span className="title-date"> ° Sep 18 - Oct 18</span></p>
+          <p className="modal-title"><strong>{colonia}, {city}</strong></p>
+          <p style={{ color: '#ED4B4B'}}>{confirmados} Casos de Covid-19 <span className="title-date"> ° Sep 18 - Oct 18</span></p>
           <div className="modal-grid">
             <div className="item">
               <p className="item-title">Confirmados:</p>
-              <h4 className="item-color">22</h4>
+              <h4 className="item-color">{confirmados}</h4>
               <small><BsArrowUp size={10} color="#ED4B4B" /> 5</small>
             </div>
             <div className="item">
               <p className="item-title">Sospechosos:</p>
-              <h4 className="item-color">20</h4>
+              <h4 className="item-color">10</h4>
               <small><BsArrowDown size={10} color="#FEC703" /> 8</small>
             </div>
             <div className="item">
               <p className="item-title">Recuperados:</p>
-              <h4 className="item-color">2</h4>
+              <h4 className="item-color">{recuperados}</h4>
               <small><BsArrowUp size={10} color="var(--primary)" /> 2</small>
             </div>
             <div className="item">
               <p className="item-title">Negativos:</p>
-              <h4 className="item-color">1</h4>
+              <h4 className="item-color">3</h4>
               <small><BsArrowUp size={10} color="#ED4B4B" /> 1</small>
             </div>
             <div className="item">
               <p className="item-title">Defunciones:</p>
-              <h4 className="item-color">12</h4>
+              <h4 className="item-color">{muertes}</h4>
               <small><BsArrowUp size={10} color="#ED4B4B" /> 3</small>
             </div>
           </div>

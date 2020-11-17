@@ -24,12 +24,10 @@ export async function getServerSideProps(ctx) {
   const session = getSession(ctx.req)
   const slug = ctx.query.slug
   const place = await new Places().getCollectionById(slug)
-  console.log(place)
   if (!place) {
     ctx.res.statusCode = 404
     return { props: { statusCode: 404 } }
   }
-  console.log(place)
   return {
     props: {
       ...session,

@@ -102,7 +102,6 @@ const MenuStyled = styled.nav`
 function Menu({ className }) {
   const { state: user, setState } = useContext(UserContext)
   const pathname = useRouter().asPath
-  console.log('desde el menu este es el user ', user)
   const handleLogout = () => logoutSession(setState)
   return (
     <MenuStyled className={className}>

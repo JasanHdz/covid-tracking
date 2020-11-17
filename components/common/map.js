@@ -7,17 +7,15 @@ import {
   Circle,
   InfoWindow
 } from 'react-google-maps' 
-import json from 'mock.json';
 import { useState } from 'react'
 import { styles } from 'common/map-style'
 import Modal from 'common/modal'
 import { UniversalPortal } from '@jesstelford/react-portal-universal'
 
 
-function Maps(props) {
-  const data = json 
+function Maps({ center, data }) {
   const [state, setState] = useState({ showInfoIndex: '', modal: false })
-  const [location, setLocation] = useState(props.location ? props.location : {
+  const [location, setLocation] = useState(center ? center : {
     lat: 19.0576039,
     lng: -98.2094129
   })
@@ -81,17 +79,17 @@ function Maps(props) {
           </InfoWindow>
         )}
       </Marker>
-      {data.map((location, index) => (
+      {data.map((colonie, index) => (
         <Marker
-          key={index}
-          label={location.data.confirmados}
+          key={colonie.uid}
+          label={colonie.confirmados}
           labelStyle={{color: 'blue',}}
-          position={{ lat: Number(location.lat), lng: Number(location.lng) }}
+          position={{ lat: Number(colonie.lat), lng: Number(colonie.lng) }}
           onClick={() => handleToggleOpen(index)}
         >
           {state.showInfoIndex === index && (
             <UniversalPortal selector="#page-portal">
-              <Modal isActive={state.modal} onClose={() => setState({modal: false})} location={location} />}
+              <Modal isActive={state.modal} onClose={() => setState({modal: false})} data={colonie} />
             </UniversalPortal>
           )}
         </Marker>

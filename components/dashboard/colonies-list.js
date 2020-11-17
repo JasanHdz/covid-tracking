@@ -65,16 +65,15 @@ function ColoniesList({ places = [] }) {
   const handleSelectState = (event) => {
     const value = event.target.value
     setColonies(places.filter(item => item.city === value))
-    console.log(value)
   }
   return (
     <ColoniesListStyled>
-      <Search value={inputValue} onChange={handleChangeSearch} />
+      <Search value={inputValue} onChange={handleChangeSearch} placeholder="Buscar colonia..." />
       <div className="row-filter">
         <div className="select-container">
           <label className="estados" htmlFor="estados">Filtrar por estado</label>
           <select onChange={handleSelectState} id="estados" className="select" name="estados">
-            <option disabled defaultValue >Estado</option>
+            <option value="" >--Seleciona un estado--</option>
             {estados.map((estado, index) => {
               return <option key={index} value={estado}>{estado}</option>
             })}

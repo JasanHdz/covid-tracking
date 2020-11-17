@@ -65,7 +65,7 @@ function AddColonieModal({ onClose, place, setPlace, updateList }) {
     }
     new Places().addDocument(payload).then(docRef => {
       updateList({ ...payload, uid: docRef.id })
-    }).catch(({ message }) => console.log(`oh no! parace que ocurrió un error ${message}`))
+    }).catch(({ message }) => console.erro(`oh no! parace que ocurrió un error ${message}`))
     setPlace(modelColonie)
     onClose()
   }
@@ -90,15 +90,15 @@ function AddColonieModal({ onClose, place, setPlace, updateList }) {
           <MdClose onClick={handleClose} className="close" size={28} color="var(--primary)" />
       </div>
       <form method="POST" onSubmit={handleSubmit}>
-        <FormGroup {...colonia} label="Colonia" />
+        <FormGroup id="colonia" {...colonia} label="Colonia" />
         <Select id="estado" value="" option="--Selecciona un estado--" onChange={city.onChange} label="Estado" />
         <div className="row-two-columns">
-          <FormGroup {...lat} type="number" label="Latitud" />
-          <FormGroup {...lng} type="number" label="Longitud" />
+          <FormGroup {...lat} type="number" label="Latitud" id="latitud" />
+          <FormGroup {...lng} type="number" label="Longitud" id="longitud" />
         </div>
-        <FormGroup {...confirmados} type="number" label="Confirmados" />
-        <FormGroup {...recuperados} type="number" label="Recuperados" />
-        <FormGroup {...muertes} type="number" label="Muertes" />
+        <FormGroup {...confirmados} type="number" label="Confirmados" id="confirmados" />
+        <FormGroup {...recuperados} type="number" label="Recuperados" id="recuperados" />
+        <FormGroup {...muertes} type="number" label="Muertes" id="muertes" />
         <BtnPrimary disabled={disabled} fullSize>Guardar</BtnPrimary>
       </form>
       </Wrapper>

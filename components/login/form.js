@@ -57,7 +57,10 @@ const LoginFormStyled = styled.section`
       padding: 1rem;
       border-radius: 12px;
       outline: 0;
-      border: 1px solid var(--dark);
+      border: 1px solid rgba(0,0,0,0.24);
+      :focus {
+        border: 1px solid var(--dark);  
+      }
     }
   }
 
@@ -85,7 +88,6 @@ const LoginFormStyled = styled.section`
 function LoginForm() {
   function handleSubmit(event) {
     event.preventDefault()
-    console.log('evento submit')
   }
   return (
     <LoginFormStyled>
@@ -103,7 +105,7 @@ function LoginForm() {
       <form onSubmit={handleSubmit} method="POST" className="form">
         <input required type="email" placeholder="email" />
         <input required type="password" placeholder="contraseña" />
-        <BtnPrimary type="submit">Iniciar sesión</BtnPrimary>
+        <BtnPrimary padding="12px 16px;" type="submit">Iniciar sesión</BtnPrimary>
       </form>
     </LoginFormStyled>
   )

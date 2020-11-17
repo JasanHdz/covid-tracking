@@ -21,7 +21,6 @@ export async function getServerSideProps(context) {
   withAuth(context)
   const session = getSession(context.req)
   const places = await new Places().getCollection()
-  console.log(places)
   return {
     props: {
       places,

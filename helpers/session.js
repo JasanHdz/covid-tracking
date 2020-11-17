@@ -24,7 +24,6 @@ export function withAuth(context) {
   if (user_token) {
     console.log('tiene token')
   } else {
-    console.log(context.resolvedUrl, 'resolvedUrl')
     const location = context.resolvedUrl !== '/' ? `/login?next=${context.resolvedUrl}` : '/login'
     redirect(location, context)
   }

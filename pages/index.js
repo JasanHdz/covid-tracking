@@ -10,8 +10,7 @@ const defaultMapOptions = {
   fullscreenControl: false,
 } 
 
-function Index(props) {
-  console.log(props)
+function Index({ data, location }) {
   return (
     <>
       <Map
@@ -20,7 +19,8 @@ function Index(props) {
         mapElement={<div style={{ height: '100%' }} />}
         containerElement={<Wrapper />}
         defaultOptions={defaultMapOptions}
-        location={props.location}
+        center={location}
+        data={data}
       />
       <Navigation background="white" />
       <BottomNavigation />

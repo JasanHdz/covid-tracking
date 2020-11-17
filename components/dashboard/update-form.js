@@ -49,13 +49,13 @@ function UpdateForm({ place }) {
   }
   return (
     <form method="POST" onSubmit={handleSubmit}>
-      <FormGroup value={colonia.value} onChange={recuperados.onChange} label="Colonia" />
+      <FormGroup value={colonia.value} onChange={recuperados.onChange} label="Colonia" id="colonia" />
       <Select value={city.value} option={city.value} onChange={city.onChange} label="Estado" id="estado" />
-      <FormGroup type="number" value={lat.value} onChange={lat.onChange} label="Latitud" />
-      <FormGroup type="number" value={lng.value} onChange={lng.onChange} label="Longitud" />
-      <FormGroup type="number" value={confirmados.value} onChange={confirmados.onChange} label="Confirmados" />
-      <FormGroup type="number" value={recuperados.value} onChange={recuperados.onChange} label="Recuperados" />
-      <FormGroup type="number" value={muertes.value} onChange={muertes.onChange} label="Muertes" />
+      <FormGroup type="number" value={lat.value} onChange={lat.onChange} label="Latitud"  id="latitud"/>
+      <FormGroup type="number" value={lng.value} onChange={lng.onChange} label="Longitud" id="longitud" />
+      <FormGroup type="number" value={confirmados.value} onChange={confirmados.onChange} label="Confirmados" id="confirmados" />
+      <FormGroup type="number" value={recuperados.value} onChange={recuperados.onChange} label="Recuperados" id="recuperados" />
+      <FormGroup type="number" value={muertes.value} onChange={muertes.onChange} label="Muertes" id="muertes" />
       <BtnPrimary disabled={disabled}>Guardar cambios</BtnPrimary>
     </form>
   )

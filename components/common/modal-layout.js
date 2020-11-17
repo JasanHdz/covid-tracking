@@ -32,8 +32,16 @@ const ModalLayoutStyled = styled.section`
 
   .buttons-wrapper {
     display: flex;
-   justify-content: space-evenly;
+    justify-content: space-evenly;
     padding: 0 50px;
+  }
+  @media screen and (min-width: 768px) {
+    .buttons-wrapper {
+      justify-content: center;
+      button:first-child {
+        margin-right: 100px; 
+      }
+    }
   }
 `
 

@@ -36,7 +36,6 @@ function TestForm({ setNextPage, userPayload }) {
       testPayload,
       userPayload
     }
-    console.log(data)
     alert('Genial la data esta siendo procesada ☺😎☺😛')
   }
   return (

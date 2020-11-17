@@ -16,6 +16,7 @@ const ButtonStyled = styled.button`
   background-color: ${({ background }) => background};
   color: ${({ color }) => color};
   width: ${({ fullSize }) => fullSize && '100%'};
+  padding: ${({ padding }) => padding};
   :active {
     transform: scale(.9);
   }
@@ -23,7 +24,7 @@ const ButtonStyled = styled.button`
   :disabled {
     opacity: 0.5;
   }
-  @media screen and (min-width: 375px) {
+  @media screen and (min-width: 350px) {
     padding: 9px 16px;
   }
 `
