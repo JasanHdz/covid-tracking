@@ -56,6 +56,9 @@ const NavigationContainer = styled.div`
       font-size: 1rem;
     }
   }
+  @media print {
+    display: none;
+  }
 ` 
 
 

@@ -89,7 +89,7 @@ function Maps({ center, data }) {
         >
           {state.showInfoIndex === index && (
             <UniversalPortal selector="#page-portal">
-              <Modal isActive={state.modal} onClose={() => setState({modal: false})} data={colonie} />
+              <Modal colonies={data} isActive={state.modal} onClose={() => setState({modal: false})} data={colonie} />
             </UniversalPortal>
           )}
         </Marker>

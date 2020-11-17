@@ -1,13 +1,14 @@
-import { loginWithGoogle } from 'lib/auth'
+import { loginWithGoogle, loginWithEmailAndPassword } from 'lib/auth'
 import { FcGoogle } from 'react-icons/fc'
 import styled from 'styled-components'
 import Button, { BtnPrimary } from 'common/button'
+import { useRef } from 'react'
 
 const Span = styled.span`
   margin-left: 10px;
 `
 
-const ButtonStyled = styled(Button)`
+const GoogleButton = styled(Button)`
   margin: auto;
   background-color: white;
   border: 1px solid rgba(0, 0, 0, 0.24);
@@ -86,8 +87,13 @@ const LoginFormStyled = styled.section`
 `
 
 function LoginForm() {
-  function handleSubmit(event) {
+  const ref = useRef(null)
+  async function handleSubmit(event) {
     event.preventDefault()
+    const formData = new FormData(ref.current)
+    const email = formData.get('email')
+    const password = formData.get('password')
+    await loginWithEmailAndPassword(email, password)
   }
   return (
     <LoginFormStyled>
@@ -96,15 +102,15 @@ function LoginForm() {
         <p className="isotipo">Covid Tracking</p>
       </div>
       <h1>Iniciar sesión como administrador</h1>
-      <ButtonStyled onClick={loginWithGoogle}><FcGoogle size={25} /> <Span>Iniciar sesión con Google</Span></ButtonStyled><br />
+      <GoogleButton onClick={loginWithGoogle}><FcGoogle size={25} /> <Span>Iniciar sesión con Google</Span></GoogleButton><br />
       <div className="alternative">
         <div className="line" />
         <p>O INICIA CON CORREO</p>
         <div className="line" />
       </div>
-      <form onSubmit={handleSubmit} method="POST" className="form">
-        <input required type="email" placeholder="email" />
-        <input required type="password" placeholder="contraseña" />
+      <form ref={ref} onSubmit={handleSubmit} method="POST" className="form">
+        <input required type="email" placeholder="email" name="email" />
+        <input required type="password" placeholder="contraseña" name="password" />
         <BtnPrimary padding="12px 16px;" type="submit">Iniciar sesión</BtnPrimary>
       </form>
     </LoginFormStyled>

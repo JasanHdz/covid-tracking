@@ -7,6 +7,7 @@ const UserStyled = styled.section`
   img {
     border-radius: 50%;
     margin-right: 12px;
+    object-fit: cover;
   }
   h4 {
     font-size: 14px;
@@ -17,11 +18,13 @@ const UserStyled = styled.section`
 `
 
 function User({ photoURL, userName }) {
+  const avatarRandom = 'https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80'
+  const url = photoURL !== null ? photoURL : avatarRandom
   return (
     <UserStyled>
-      <img width={45} height={45} src={photoURL} alt="avatar" />
+      <img width={45} height={45} src={url} alt="avatar" />
       <div>
-        <h4>¡Hola! {userName}</h4>
+        <h4>¡Hola! {userName || 'Súper Admin'}</h4>
         <p>Administrador</p>
       </div>
     </UserStyled>

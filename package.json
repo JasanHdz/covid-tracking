@@ -31,7 +31,9 @@
     "react-google-maps": "9.4.5",
     "react-icons": "3.11.0",
     "styled-components": "5.2.0",
-    "universal-cookie": "4.0.4"
+    "universal-cookie": "4.0.4",
+    "vis-data": "7.1.1",
+    "vis-network": "8.5.3"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "4.0.0",

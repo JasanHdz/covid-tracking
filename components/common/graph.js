@@ -27,17 +27,42 @@ function Graph(props) {
       fill: '#8fa8c8',
       stroke: '#75539e',
     },
+    red: {
+      fill: '#de9797',
+      stroke: '#ED4B4B',
+    }
   };
-  const canvasEl = useRef(null);
-  const xData = ['Abr', 'May', 'Jun', 'Agos', 'Sep', 'Oct', 'Nov'];
-  const unavailable = [5, 9, 10, 9, 18, 19, 20];
-  const availableForExisting = [16, 13, 25, 33, 40, 33, 45];
+  const canvasEl = useRef(null)
+  const xData = ['May', 'Jun', 'Jul', 'Agos', 'Sep', 'Oct', 'Nov']
+  const confirmadosDataSet = [100, 220, 250, 200, 150, 120, 80]
+  const recuperadosDataSet = [60, 150, , 187, 180, 110, 78]
+  const defuncionesDataSet = [10, 23, 14, 23, 10, 6, 2]
   useEffect(() => {
-    const chart = new Chart(canvasEl.current, {
+    new Chart(canvasEl.current, {
       type: 'line',
       data: {
         labels: xData,
         datasets: [
+          {
+            label: "Defunciones",
+            fill: true,
+            backgroundColor: colors.red.fill,
+            pointBackgroundColor: colors.red.stroke,
+            borderColor: colors.red.stroke,
+            pointHighlightStroke: colors.red.stroke,
+            borderCapStyle: 'square',
+            data: defuncionesDataSet,
+          },
+          {
+            label: "Recuperados",
+            fill: true,
+            backgroundColor: colors.green.fill,
+            pointBackgroundColor: colors.green.stroke,
+            borderColor: colors.green.stroke,
+            pointHighlightStroke: colors.green.stroke,
+            borderCapStyle: 'butt',
+            data: recuperadosDataSet,
+          },
           {
             label: "Confirmados",
             fill: true,
@@ -45,18 +70,8 @@ function Graph(props) {
             pointBackgroundColor: colors.purple.stroke,
             borderColor: colors.purple.stroke,
             borderCapStyle: 'butt',
-            data: unavailable,
+            data: confirmadosDataSet,
           },
-          {
-            label: "Sospechosos",
-            fill: true,
-            backgroundColor: colors.green.fill,
-            pointBackgroundColor: colors.green.stroke,
-            borderColor: colors.green.stroke,
-            pointHighlightStroke: colors.green.stroke,
-            borderCapStyle: 'butt',
-            data: availableForExisting,
-          }
         ]
       },
       options: {

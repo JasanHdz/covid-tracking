@@ -6964,6 +6964,16 @@ uuid@^3.3.2:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
+vis-data@7.1.1:
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/vis-data/-/vis-data-7.1.1.tgz#a38b38efcc0b721181ddaa4f4359edfd75623825"
+  integrity sha512-Z5+caySDqoKL9yxbI3c/CKmUcSvROSZstuvwxbOsUpdxHpxFYEUgxC1EH4lSB1ykEaM54MVMM1UcwB9oNaWFlw==
+
+vis-network@8.5.3:
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/vis-network/-/vis-network-8.5.3.tgz#3c938806ea95ed48d502c58826d557057e2b1120"
+  integrity sha512-6Lvu7hWjm7tJS5b+b/U0GVDx75QdlknRKmGwvVQosN4pc3HjzU3vXB+yXfqNHIxk5eQuWCQT+/GsE4GGF2BkDg==
+
 vm-browserify@1.1.2, vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"

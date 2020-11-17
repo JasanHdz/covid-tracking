@@ -4,14 +4,18 @@ import { MdClose } from 'react-icons/md'
 import Wrapper from 'common/wrapper'
 import Graph from 'common/graph'
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs'
+import { BtnPrimary } from 'common/button'
+import Nodes from 'common/nodes'
 
 const ModalStyled = styled.div`
+  ${({ active }) => active ? 'min-height: 100vh' : ''};
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 0;
+  bottom: ${({ active }) => active ? -1 : 0};
   ${({ active }) => active ? 'top: 0' : ''};
-  z-index: 3;
+  z-index: 4;
+  width: 100%;
 
   border-top-right-radius: ${({ active }) => active ? '0px' : '20px'};
   border-top-left-radius: ${({ active }) => active ? '0px' : '20px'};
@@ -51,7 +55,7 @@ const ModalStyled = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-row-gap: 14px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
   }
   .item {
     &-title {
@@ -67,34 +71,32 @@ const ModalStyled = styled.div`
       color: var(--primary);
     }
   }
-  .more-button {
-    margin-top: 20px;
-    color: white;
-    background-color: var(--primary);
-    padding: 15px;
-    border: none;
-    border-radius: 6px;
-    width: 100%;
-    font-weight: 500;
-    font-size: 14px;
-    cursor: pointer;
-    outline: 0;
-    transition: .4s transform;
-
-    :active {
-      transform: scale(.9);
-    }
-  }
   .title-date {
     color: rgba(38,38,38, 0.5);
   }
+  .btn-separator {
+    margin-top: 30px;
+    text-align: center;
+  }
+  @media print {
+    border: 1px solid white;
+    .modal-grid {
+      margin-bottom: 10px;
+    }
+    .modal-close, button {
+      display: none;
+    }
+  }
 `
 
-function Modal({ data, onClose }) {
+function Modal({ data, onClose, colonies }) {
   const { city, colonia, confirmados, muertes, recuperados } = data
   const [activeShowMore, setActiveShowMore] = useState(false)
   function handleClick() {
     setActiveShowMore(true)
+  }
+  function handlePrint() {
+    window.print()
   }
   return (
     <ModalStyled active={activeShowMore}>
@@ -132,9 +134,10 @@ function Modal({ data, onClose }) {
               <small><BsArrowUp size={10} color="#ED4B4B" /> 3</small>
             </div>
           </div>
-          {!activeShowMore && <button className="more-button" onClick={handleClick}>Ver detalles</button>}
+          {!activeShowMore && <BtnPrimary onClick={handleClick}>Ver detalles</BtnPrimary>}
           {activeShowMore && <Graph />}
-          {/* {activeShowMore && <button>Imprimir datos</button>} */}
+          {activeShowMore && <Nodes colonies={colonies} />}
+          {activeShowMore && <div className="btn-separator"><BtnPrimary onClick={handlePrint}>Imprimir datos</BtnPrimary></div>}
         </div>
       </Wrapper>
     </ModalStyled>

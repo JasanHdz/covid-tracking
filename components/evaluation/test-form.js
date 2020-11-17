@@ -1,7 +1,8 @@
 import React, { useRef } from 'react'
 import RatioFormGroup from 'common/radio-form-group'
 import Button, { BtnPrimary } from 'common/button'
-
+import Evaluations from 'lib/database/evaluations'
+ 
 const mapValues = [
   {
     question: "¿Haz presentado fiebre ariba de 38° C?",
@@ -36,7 +37,11 @@ function TestForm({ setNextPage, userPayload }) {
       testPayload,
       userPayload
     }
-    alert('Genial la data esta siendo procesada ☺😎☺😛')
+    new Evaluations().addDocumentEvaluation(data).then(() => {
+      alert('Gracias por hacerte el test, se te enviarán por correo los resultados ☺😎☺')
+    }).catch(() => {
+      alert('Ocurrio un error al procesar la información, intenta más tarde')
+    })
   }
   return (
     <form ref={ref} method="POST" onSubmit={handleSubmit}>
