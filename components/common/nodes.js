@@ -21,8 +21,8 @@ function NetworkNodes({ colonies = [], ubication }) {
       shape: "dot",
       scaling: {
         label: {
-          min: 10,
-          max: 13,
+          min: 5,
+          max: 10,
         },
       },
     },

@@ -1,7 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import RatioFormGroup from 'common/radio-form-group'
 import Button, { BtnPrimary } from 'common/button'
 import Evaluations from 'lib/database/evaluations'
+import router from 'next/router'
  
 const mapValues = [
   {
@@ -24,7 +25,9 @@ const mapValues = [
 
 function TestForm({ setNextPage, userPayload }) {
   const ref = useRef(null)
+  const [disabled, setDisabled] = useState(false)
   const handleSubmit = (event) => {
+    setDisabled(true)
     event.preventDefault()
     const formData = new FormData(ref.current)
     const testPayload = {
@@ -39,6 +42,7 @@ function TestForm({ setNextPage, userPayload }) {
     }
     new Evaluations().addDocumentEvaluation(data).then(() => {
       alert('Gracias por hacerte el test, se te enviarán por correo los resultados ☺😎☺')
+      router.replace('/')
     }).catch(() => {
       alert('Ocurrio un error al procesar la información, intenta más tarde')
     })
@@ -58,7 +62,7 @@ function TestForm({ setNextPage, userPayload }) {
       ))}
       <div className="buttons-grid">
         <Button type="button" onClick={() => setNextPage(false)}>Volver</Button>
-        <BtnPrimary type="submit">Enviar datos</BtnPrimary>
+        <BtnPrimary disabled={disabled} type="submit">Enviar datos</BtnPrimary>
       </div>
     </form>
   )

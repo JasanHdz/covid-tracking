@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import { MdClose } from 'react-icons/md'
 import Wrapper from 'common/wrapper'
@@ -6,6 +6,7 @@ import Graph from 'common/graph'
 import { BsArrowUp, BsArrowDown } from 'react-icons/bs'
 import { BtnPrimary } from 'common/button'
 import Nodes from 'common/nodes'
+import Chart from 'chart.js'
 
 const ModalStyled = styled.div`
   ${({ active }) => active ? 'min-height: 100vh' : ''};
@@ -135,7 +136,8 @@ function Modal({ data, onClose, colonies }) {
             </div>
           </div>
           {!activeShowMore && <BtnPrimary onClick={handleClick}>Ver detalles</BtnPrimary>}
-          {activeShowMore && <Graph />}
+          {activeShowMore && <Graph title={`Datos de coronavirus en ${colonia}`} />}
+          {activeShowMore && <Graph title={`Datos de coronavirus en ${colonia}`} type="bar" />}
           {activeShowMore && <Nodes colonies={colonies} />}
           {activeShowMore && <div className="btn-separator"><BtnPrimary onClick={handlePrint}>Imprimir datos</BtnPrimary></div>}
         </div>

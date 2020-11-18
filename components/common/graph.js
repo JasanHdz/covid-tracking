@@ -8,9 +8,16 @@ const Canvas = styled.canvas`
   max-width: 750px;
   height: auto;
   margin: auto;
+
+  .chartjs-render-monitor {
+    background-color: red;
+    width: 100vw !important;
+    height: 100vh !important;
+  }  
+
 `
 
-function Graph(props) {
+function Graph({ title, type = 'line' }) {
   const colors = {
     green: {
       fill: '#e0eadf',
@@ -39,7 +46,7 @@ function Graph(props) {
   const defuncionesDataSet = [10, 23, 14, 23, 10, 6, 2]
   useEffect(() => {
     new Chart(canvasEl.current, {
-      type: 'line',
+      type: type,
       data: {
         labels: xData,
         datasets: [
@@ -50,7 +57,6 @@ function Graph(props) {
             pointBackgroundColor: colors.red.stroke,
             borderColor: colors.red.stroke,
             pointHighlightStroke: colors.red.stroke,
-            borderCapStyle: 'square',
             data: defuncionesDataSet,
           },
           {
@@ -60,7 +66,6 @@ function Graph(props) {
             pointBackgroundColor: colors.green.stroke,
             borderColor: colors.green.stroke,
             pointHighlightStroke: colors.green.stroke,
-            borderCapStyle: 'butt',
             data: recuperadosDataSet,
           },
           {
@@ -69,12 +74,24 @@ function Graph(props) {
             backgroundColor: colors.purple.fill,
             pointBackgroundColor: colors.purple.stroke,
             borderColor: colors.purple.stroke,
-            borderCapStyle: 'butt',
             data: confirmadosDataSet,
           },
         ]
       },
       options: {
+        maintainAspectRatio: true,
+        title: {
+          display: true,
+          text: title
+        },
+        tooltips: {
+					mode: 'index',
+					intersect: false,
+				},
+				hover: {
+					mode: 'nearest',
+					intersect: true
+				},
         responsive: true,
         scales: {
           yAxes: [{ stacked: true }],
@@ -87,6 +104,7 @@ function Graph(props) {
     }) 
   })
   return <Canvas ref={canvasEl} />
+    
 }
 
 export default Graph
